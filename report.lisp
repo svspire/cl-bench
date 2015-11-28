@@ -13,6 +13,7 @@
 
 
 (in-package :cl-user)
+(defparameter *prefix-length* 10)
 
 (defconstant +implementation+
   (concatenate 'string
@@ -30,7 +31,7 @@
     (setq benchmarks (reverse (mapcar #'first (cdr (first data)))))
     (format t "~25a~10@a" "Benchmark" "Reference")
     (dolist (impl implementations)
-      (format t "~7@a" (subseq impl 0 5)))
+      (format t "~v@a" (+ *prefix-length* 2) (subseq impl 0 *prefix-length*)))
     (format t "~%-------------------------------------------------------------------------------------~%")
     (dolist (b benchmarks)
       (format t "~&~25a" b)
@@ -41,12 +42,12 @@
         (dolist (i implementations)
           (let* ((id (cdr (assoc i data :test #'string=)))
                  (ir (third (assoc b id :test #'string=))))
-            (format t "~7,2f" (handler-case (/ ir reference-user) (error () -1)))))))
+            (format t "~v,2f" (+ *prefix-length* 2) (handler-case (/ ir reference-user) (error () -1)))))))
     (terpri)
     (format t "Reference time in first column is in seconds; other columns are relative~%")
     (format t "Reference implementation: ~a~%" +implementation+)
     (dolist (impl implementations)
-      (format t "~&Impl ~a: ~a~%" (subseq impl 0 5) impl))
+      (format t "~&Impl ~a: ~a~%" (subseq impl 0 *prefix-length*) impl))
     (format t "=== Test machine ===~%")
     (format t "   Machine-type: ~A~%" (machine-type))
     (format t "   Machine-version: ~A~%" (machine-version))
@@ -56,6 +57,6 @@
     (force-output)))
 
 (bench-analysis)
-(quit)
+;;(quit)
 
 ;; EOF
