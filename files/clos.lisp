@@ -1,3 +1,4 @@
+(declaim (optimize (speed 3) (space 1) (safety 0) (debug 0) (compilation-speed 0)))
 ;; clos.lisp -- CLOS benchmarking code
 ;;
 ;; Author: Eric Marsden <emarsden@laas.fr>
@@ -50,16 +51,14 @@
 
 (in-package :cl-bench.clos)
 
-
-(eval-when (:compile-toplevel :load-toplevel :execute)
-  (defconstant +hierarchy-depth+ 10)
-  (defconstant +hierarchy-width+ 5))
+(define-symbol-macro +hierarchy-depth+ 10)
+(define-symbol-macro +hierarchy-width+ 5)
 
 
 ;; the level-0 hierarchy
 (defclass class-0-0 () ())
 
-(defvar *instances* (make-array #.+hierarchy-width+ :element-type 'class-0-0))
+(defvar *instances* (make-array +hierarchy-width+ :element-type 'class-0-0))
 
 
 (defgeneric simple-method (a b))
@@ -93,7 +92,7 @@
 
 (defmacro class-definition (depth width)
   `(defclass ,(make-class-name depth width)
-    ,(loop :for w :from width :below #.+hierarchy-width+
+    ,(loop :for w :from width :below +hierarchy-width+
            :collect (make-class-name (1- depth) w))
     (( ,(make-attribute-name depth width)
       :initarg ,(make-initarg-name depth width)
@@ -123,18 +122,18 @@
 
 (defun defclass-forms ()
   (let (forms)
-    (loop :for width :to #.+hierarchy-width+ :do
+    (loop :for width :to +hierarchy-width+ :do
          (push `(defclass ,(make-class-name 1 width) (class-0-0) ()) forms))
     (loop :for dpth :from 2 :to +hierarchy-depth+ :do
-          (loop :for wdth :to #.+hierarchy-width+ :do
+          (loop :for wdth :to +hierarchy-width+ :do
                 (push `(class-definition ,dpth ,wdth) forms)
                 (push `(init-instance-definition ,dpth ,wdth) forms)))
     (nreverse forms)))
 
 (defun defmethod-forms ()
   (let (forms)
-    (loop :for dpth :from 2 to #.+hierarchy-depth+ :do
-          (loop :for wdth :to #.+hierarchy-width+ :do
+    (loop :for dpth :from 2 to +hierarchy-depth+ :do
+          (loop :for wdth :to +hierarchy-width+ :do
                 (push `(simple-method-definition ,dpth ,wdth) forms)
                 #-(or clisp poplog)
                 (push `(complex-method-definition ,dpth ,wdth) forms)))
@@ -142,8 +141,8 @@
 
 (defun after-method-forms ()
   (let (forms)
-    (loop :for depth :from 2 :to #.+hierarchy-depth+ :do
-          (loop :for width :to #.+hierarchy-width+ :do
+    (loop :for depth :from 2 :to +hierarchy-depth+ :do
+          (loop :for width :to +hierarchy-width+ :do
                 (push `(after-method-definition ,depth ,width) forms)))
     (nreverse forms)))
 
@@ -158,11 +157,11 @@
 
 (defun make-instances ()
   (dotimes (i 5000)
-    (dotimes (w #.+hierarchy-width+)
+    (dotimes (w +hierarchy-width+)
       (setf (aref *instances* w)
-            (make-instance (make-class-name #.+hierarchy-depth+ w)
-                           (make-initarg-name #.+hierarchy-depth+ w) 42))
-      `(incf (slot-value (aref *instances* w) ',(make-attribute-name #.+hierarchy-depth+ w))))))
+            (make-instance (make-class-name +hierarchy-depth+ w)
+                           (make-initarg-name +hierarchy-depth+ w) 42))
+      `(incf (slot-value (aref *instances* w) ',(make-attribute-name +hierarchy-depth+ w))))))
 
 ;; the code in the function MAKE-INSTANCES is very difficult to
 ;; optimize, because the arguments to MAKE-INSTANCE are not constant.
@@ -192,12 +191,12 @@
     (simple-method (aref *instances* num) i)))
 
 (defun methodcalls/simple ()
-  (dotimes (w #.+hierarchy-width+)
+  (dotimes (w +hierarchy-width+)
     (methodcall/simple w)))
 
 (defun methodcalls/simple+after ()
   (add-after-methods)
-  (dotimes (w #.+hierarchy-width+)
+  (dotimes (w +hierarchy-width+)
     (methodcall/simple w)))
 
 #-(or clisp poplog)
@@ -207,7 +206,7 @@
 
 #-(or clisp poplog)
 (defun methodcalls/complex ()
-  (dotimes (w #.+hierarchy-width+)
+  (dotimes (w +hierarchy-width+)
     (methodcall/complex w)))
 
 
