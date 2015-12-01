@@ -147,13 +147,16 @@
     (nreverse forms)))
 
 (defun run-defclass ()
-  (funcall (compile nil `(lambda () ,@(defclass-forms)))))
+  (dolist (form (defclass-forms))
+    (funcall (compile nil `(lambda () ,form)))))
 
 (defun run-defmethod ()
-  (funcall (compile nil `(lambda () ,@(defmethod-forms)))))
+  (dolist (form (defmethod-forms))
+    (funcall (compile nil `(lambda () ,form)))))
 
 (defun add-after-methods ()
-  (funcall (compile nil `(lambda () ,@(after-method-forms)))))
+  (dolist (form (after-method-forms))
+    (funcall (compile nil `(lambda () ,form)))))
 
 (defun make-instances ()
   (dotimes (i 5000)
