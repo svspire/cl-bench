@@ -1,0 +1,18 @@
+; Just make a report
+(cwd "~/Lisp/cl-bench")
+(load "sysdep/setup-openmcl.lisp")
+(load "report.lisp")
+(bench-analysis)
+
+
+(LOAD (COMPILE-FILE-PATHNAME #p"files/gabriel.olisp"))
+
+(bench-time 'cl-bench.gabriel:run-frpoly/bignum 30 "FRPOLY/BIGNUM")
+
+
+(load "do-compilation-script.lisp")
+(load "do-execute-script.lisp")
+(cl-bench::run-benchmarks)
+
+(cl-bench.clos:run-defclass)
+(bench-report 'cl-bench.clos:run-defclass "CLOS/defclass" 1)
