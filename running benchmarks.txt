@@ -1,18 +1,22 @@
-; Just make a report
-(cwd "~/Lisp/cl-bench")
+; Just make a report based on previous data
+(cwd "~/Lisp/svs-forks/cl-bench")
 (load "sysdep/setup-openmcl.lisp")
-(load "report.lisp")
-(bench-analysis)
+(load "report.lisp") ; to show comparisons with other lisps
+(bench-analysis) ; if you've already loaded "report.lisp" once
 
+; Run benchmarks on current lisp
+(load "do-compilation-script.lisp")
+(load "do-execute-script.lisp")
+(cl-bench::run-benchmarks)
+; then do the "just make a report" operations above to see a comparison
 
 (LOAD (COMPILE-FILE-PATHNAME #p"files/gabriel.olisp"))
 
 (bench-time 'cl-bench.gabriel:run-frpoly/bignum 30 "FRPOLY/BIGNUM")
 
 
-(load "do-compilation-script.lisp")
-(load "do-execute-script.lisp")
-(cl-bench::run-benchmarks)
 
+; to run just one test
 (cl-bench.clos:run-defclass)
 (bench-report 'cl-bench.clos:run-defclass "CLOS/defclass" 1)
+
