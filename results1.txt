@@ -1,0 +1,70 @@
+? Benchmark                 Reference  Chromebook   1.12 CCL   32-bit CCL  BBB 1GHz    BBB 300MHz
+-------------------------------------------------------------------------------------
+COMPILER                 [      0.82]        2.07        1.16        0.83        8.34       23.26
+LOAD-FASL                [      0.08]        2.47        1.04        0.84        8.75       26.77
+SUM-PERMUTATIONS         [      1.79]        1.59        0.94        0.66        4.82       13.76
+WALK-LIST/SEQ            [      0.01]        3.29        0.85        1.31       42.24       64.34
+WALK-LIST/MESS           [      0.01]        5.11        2.18        1.93       45.10       86.11
+BOYER                    [      4.46]        1.32        1.42        0.66        5.17       15.94
+BROWSE                   [      0.24]        1.42        1.40        0.73        4.82       14.64
+DDERIV                   [      0.21]        1.43        1.37        1.09        5.49       13.84
+DERIV                    [      0.26]        0.87        1.04        0.88        4.65       11.75
+DESTRUCTIVE              [      0.20]        1.55        1.30        0.85        4.73       14.68
+DIV2-TEST-1              [      0.46]        0.72        1.10        0.73        2.00        6.67
+DIV2-TEST-2              [      0.54]        0.94        1.11        0.83        1.65        5.48
+FFT                      [      0.04]        1.82        1.26        0.86       10.69       37.48
+FRPOLY/FIXNUM            [      0.26]        1.44        1.58        0.78        5.33       16.57
+FRPOLY/BIGNUM            [      0.50]        0.94        1.70        0.45        4.28       12.16
+FRPOLY/FLOAT             [      0.56]        1.79        1.13        0.98        7.54       24.59
+PUZZLE                   [      0.37]        2.21        0.76        1.73        6.28       21.47
+TAK                      [      0.12]        2.33        0.76        2.07        5.19       17.66
+CTAK                     [      0.43]        1.74        0.83        1.24        4.17       14.22
+TRTAK                    [      0.08]        3.22        1.44        1.54        7.15       24.37
+TAKL                     [      0.20]        3.40        1.70        1.02        8.43       28.69
+STAK                     [      0.36]        2.39        1.75        0.89        6.57       22.73
+FPRINT/UGLY              [      1.53]        2.74        1.41        1.04        9.60       32.60
+FPRINT/PRETTY            [      2.37]        2.25        0.80        0.71        6.20       20.85
+TRAVERSE                 [      0.77]        1.31        1.11        0.83        6.93       17.76
+TRIANGLE                 [      0.38]        2.65        1.21        0.99        6.93       23.63
+RICHARDS                 [      0.87]        1.49        1.15        0.82        4.86       16.58
+FACTORIAL                [      0.14]        1.28        1.26        1.18        8.27       20.42
+FIB                      [      0.05]        2.07        1.18        0.92        6.68       22.77
+FIB-RATIO                [      0.03]        2.27        1.51        0.77        6.11       18.61
+ACKERMANN                [      0.75]        3.15        1.13        1.06       12.69       32.99
+MANDELBROT/COMPLEX       [      0.32]        1.89        0.99        1.34        9.23       24.20
+MANDELBROT/DFLOAT        [      0.03]        2.41        1.05        1.16       11.39       35.89
+MRG32K3A                 [      6.98]        1.68        0.83        0.68        4.03       13.30
+CRC40                    [      1.33]       18.20        0.91        9.50       57.63      175.49
+BIGNUM/ELEM-100-1000     [      0.62]        1.02        1.57        0.71        3.27       11.17
+BIGNUM/ELEM-1000-100     [      3.94]        0.83        1.40        0.89        2.89        9.88
+BIGNUM/ELEM-10000-1      [      4.62]        1.04        1.17        0.81        3.55       12.18
+BIGNUM/PARI-100-10       [      0.44]        1.42        1.39        1.64        5.25       17.90
+BIGNUM/PARI-200-5        [     11.56]        0.67        1.29        1.01        2.55        8.69
+PI-DECIMAL/SMALL         [      1.51]        7.63        1.21        7.76       25.97       88.43
+PI-DECIMAL/BIG           [      1.82]       16.08        1.34       22.15       60.18      205.24
+PI-ATAN                  [      1.70]        3.34        1.06        0.73        7.15       23.54
+PI-RATIOS                [      4.52]        0.85        1.15        0.67        2.82        9.70
+HASH-STRINGS             [      3.24]        1.03        1.18        0.92        4.89       12.38
+HASH-INTEGERS            [      1.20]        2.33        1.30        1.46        7.25       20.46
+SLURP-LINES              [     12.93]        1.85        0.99        1.54       12.74       35.30
+BOEHM-GC                 [      6.14]        1.02        1.12        0.55        2.96        8.41
+DEFLATE-FILE             [      0.24]        1.29        1.01        0.87        4.19       13.52
+1D-ARRAYS                [      0.02]        2.28        1.15        1.42        7.17       22.24
+2D-ARRAYS                [      0.40]        2.95        1.03        4.10       11.61       35.20
+3D-ARRAYS                [      1.14]        2.43        0.91        3.83        9.79       30.79
+BITVECTORS               [      0.31]        1.82        0.94        1.30       17.92       38.35
+BENCH-STRINGS            [      0.88]        2.01        1.07        2.00        6.11       17.84
+fill-strings/adjustable  [     15.11]        1.80        1.06        0.96        6.04       17.82
+STRING-CONCAT            [     24.38]        2.18        1.27        1.71        5.69       18.62
+SEARCH-SEQUENCE          [      1.70]        1.81        0.93        0.95        4.80       16.04
+Reference time in first column is in seconds; other columns are relative
+Reference implementation: Clozure Common Lisp Version 1.11-dev-r16524M-trunk  (DarwinX8664)
+Impl Chromebook: Chromebook Clozure Common Lisp Version 1.12-dev-r16642M-trunk  (LinuxARM32)
+Impl  1.12 CCL :  1.12 CCL Clozure Common Lisp Version 1.12-dev-r16637-trunk  (DarwinX8664)
+Impl 32-bit CCL: 32-bit CCL Clozure Common Lisp Version 1.11-dev-r16524M-trunk  (DarwinX8632)
+Impl BBB 1GHz  : BBB 1GHz   Clozure Common Lisp Version 1.12-dev-r16641-trunk  (LinuxARM32)
+Impl BBB 300MHz: BBB 300MHz Clozure Common Lisp Version 1.12-dev-r16641-trunk  (LinuxARM32)
+=== Test machine ===
+   Machine-type: x86_64
+   Machine-version: MacBookPro8,1
+

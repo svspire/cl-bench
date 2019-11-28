@@ -1,5 +1,5 @@
 ; Just make a report based on previous data
-(cwd "~/Lisp/svs-forks/cl-bench")
+(cwd "~/Lisp/third-party/cl-bench")
 (load "sysdep/setup-openmcl.lisp")
 (load "report.lisp") ; to show comparisons with other lisps
 (bench-analysis) ; if you've already loaded "report.lisp" once
